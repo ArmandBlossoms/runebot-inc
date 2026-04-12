@@ -1,0 +1,48 @@
+/* Global reset and base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: #1a1009;
+  color: #f0d080;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  overflow: hidden;
+}
+
+#app {
+  height: 100vh;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1009;
+}
+::-webkit-scrollbar-thumb {
+  background: #5a3f2a;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8c6239;
+}
+
+/* Text selection */
+::selection {
+  background: #8c6239;
+  color: #f0d080;
+}
+
+/* Remove default button styling */
+button {
+  transition: all 0.15s ease;
+}
+
+/* Utility */
+.hidden { display: none !important; }
