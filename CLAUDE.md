@@ -8,8 +8,37 @@ Built with Svelte 5 (runes mode) + TypeScript + Vite. No backend, no auth, no da
 ```bash
 npm run dev       # starts at http://localhost:5173
 npm run build     # production build → dist/
-npx tsc --noEmit  # type check only
+npm run check     # type check (svelte-check + tsc)
+npm test          # run vitest unit tests
 ```
+
+## Git Worktrees
+
+Useful when you want to run multiple Claude Code sessions in parallel on
+different branches without them stepping on each other's files or fighting
+over port 5173. Skip this if you're only working on one thing at a time.
+
+**Convention**: worktrees live as **siblings** of the main repo
+(`../runebot-inc-<slug>`), not nested inside it. Each worktree gets its own
+`node_modules/`.
+
+```bash
+# Create a new worktree on a new branch (base defaults to main)
+./scripts/worktree-new.sh my-feature
+
+# Or branch from something other than main
+./scripts/worktree-new.sh my-feature some-other-branch
+
+# List all worktrees
+git worktree list
+
+# Remove a worktree (never use `rm -rf` — leaves stale metadata)
+git worktree remove ../runebot-inc-my-feature
+```
+
+**Port collisions**: main repo uses 5173. Additional worktrees should run
+`npm run dev -- --port 5174` (then 5175, 5176, …). The helper script prints
+a suggested port after creation.
 
 ## Desktop Location
 
