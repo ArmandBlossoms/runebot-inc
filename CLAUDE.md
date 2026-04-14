@@ -72,7 +72,7 @@ interface GameState {
 | Tier | Count | Examples | GP/hr range | Req |
 |------|-------|---------|-------------|-----|
 | 1 (F2P) | **60** | Chickens, Trees, Tin, Iron Bar Smelting, Air Runes, Cowhide Tanning, Hill Giants, Wilderness Runite | 220–14,000 | Default — auto-unlocked, gated by skill reqs |
-| 2 (Members) | 5 | Green Dragons, Blast Furnace, Blackjacking | 20,000–40,000 | Unlock cost + Members |
+| 2 (Members) | **51** | Green Dragons, Blast Furnace, Slayer ladder, Barrows, Hallowed Sepulchre, Pyramid Plunder | 0–44,000 | Unlock cost + Members |
 | 3 (Late) | 4 | Zulrah, Vorkath, Chambers of Xeric | 45,000–200,000 | Premium |
 | 4 (Raids) | 2 | Tombs of Amascut (3-bot), Theatre of Blood (5-bot) | 600k–1.2M total | Premium, team |
 
@@ -127,6 +127,13 @@ Sale PP = `Math.floor(avgCombat / 2)`
 - Bot account lifecycle (create → assign → collect → sell/dismiss) working
 
 ## Work Log
+
+### 2026-04-14 — Phase 2c complete: Tier 2 RC, Magic, Thieving & Agility
+- Added 15 new Tier 2 activities: 4 Runecrafting (ZMI altar, Law/Death/Blood runes), 3 Magic (Enchant Bolts, Humidify, Plank Make), 4 Thieving (Silk Stalls, Master Farmers, Ardougne Knights, Pyramid Plunder), 4 Agility (Brimhaven Arena, Agility Pyramid, Canifis Rooftop, Hallowed Sepulchre).
+- Tier 2 count: 36 → **51** (target: ~50, achieved).
+- Bumped unit test invariant `TIER_2_ACTIVITIES.length >= 51`.
+- Verified: 17/17 vitest tests pass, `npm run build` clean (1.66s).
+- **Tier 2 expansion COMPLETE.** All 3 phases (2a + 2b + 2c) shipped, +46 activities total over the original 5.
 
 ### 2026-04-14 — Phase 2b complete: Tier 2 Members Skilling
 - Added 15 new Tier 2 activities: 4 woodcutting (teaks/mahogany/magic/redwood), 5 fishing (barbarian/monkfish/karambwan/anglerfish/dark crabs), 4 mining (motherlode/pure essence/blast mine/amethyst), 2 smithing (cannonballs/blast furnace runite).

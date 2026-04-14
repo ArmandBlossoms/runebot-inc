@@ -45,6 +45,14 @@ export type ActivityId =
   | 'fish_barbarian' | 'fish_monkfish' | 'fish_karambwan' | 'fish_anglerfish' | 'fish_dark_crabs'
   | 'mine_motherlode' | 'mine_pure_essence' | 'mine_blast_mine' | 'mine_amethyst'
   | 'smith_cannonballs' | 'smith_blast_furnace_rune'
+  // Tier 2 - Members — Runecrafting
+  | 'rc_law_runes' | 'rc_death_runes' | 'rc_blood_runes' | 'rc_zmi_altar'
+  // Tier 2 - Members — Magic
+  | 'magic_humidify' | 'magic_plank_make' | 'magic_enchant_bolts'
+  // Tier 2 - Members — Thieving
+  | 'thieve_silk_stalls' | 'thieve_master_farmers' | 'thieve_ardougne_knights' | 'thieve_pyramid_plunder'
+  // Tier 2 - Members — Agility
+  | 'agility_brimhaven_arena' | 'agility_pyramid' | 'agility_canifis_rooftop' | 'agility_hallowed_sepulchre'
   // Tier 3 - Late game
   | 'zulrah' | 'vorkath' | 'high_alching' | 'chambers_of_xeric'
   // Tier 4 - Endgame raids
