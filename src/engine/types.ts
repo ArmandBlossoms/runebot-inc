@@ -40,6 +40,11 @@ export type ActivityId =
   | 'slayer_bloodvelds' | 'slayer_aberrant_spectres' | 'slayer_dust_devils'
   | 'slayer_kurasks' | 'slayer_gargoyles' | 'slayer_nechryael'
   | 'boss_obor' | 'boss_giant_mole' | 'boss_sarachnis' | 'boss_kbd' | 'boss_barrows'
+  // Tier 2 - Members — Skilling (gathering & production)
+  | 'wc_teaks' | 'wc_mahogany' | 'wc_magic' | 'wc_redwood'
+  | 'fish_barbarian' | 'fish_monkfish' | 'fish_karambwan' | 'fish_anglerfish' | 'fish_dark_crabs'
+  | 'mine_motherlode' | 'mine_pure_essence' | 'mine_blast_mine' | 'mine_amethyst'
+  | 'smith_cannonballs' | 'smith_blast_furnace_rune'
   // Tier 3 - Late game
   | 'zulrah' | 'vorkath' | 'high_alching' | 'chambers_of_xeric'
   // Tier 4 - Endgame raids

@@ -128,6 +128,13 @@ Sale PP = `Math.floor(avgCombat / 2)`
 
 ## Work Log
 
+### 2026-04-14 — Phase 2b complete: Tier 2 Members Skilling
+- Added 15 new Tier 2 activities: 4 woodcutting (teaks/mahogany/magic/redwood), 5 fishing (barbarian/monkfish/karambwan/anglerfish/dark crabs), 4 mining (motherlode/pure essence/blast mine/amethyst), 2 smithing (cannonballs/blast furnace runite).
+- Tier 2 count: 21 → 36.
+- Bumped unit test invariant `TIER_2_ACTIVITIES.length >= 36`.
+- Verified: 17/17 vitest tests pass, `npm run build` clean.
+- Tier 2 progress: 36/~50 target. Phase 2c remaining.
+
 ### 2026-04-14 — Phase 2a complete: Tier 2 Combat/Slayer/Bosses
 - Added 16 new Tier 2 activities: 1 combat (Moss Giants), 11 Slayer monsters (Crawling Hands → Nechryael, levels 5-80), 5 entry-level bosses (Obor, Giant Mole, Sarachnis, KBD, Barrows).
 - Tier 2 count: 5 → 21.
