@@ -110,10 +110,17 @@ export function loadGame(): GameState | null {
 
 function migrateState(raw: Partial<GameState>): GameState {
   const defaults = createInitialState();
+  // Union previously-unlocked activities with the current default-unlocked set
+  // so older saves automatically gain newly-added free Tier 1 activities.
+  const mergedUnlocks = Array.from(new Set<ActivityId>([
+    ...DEFAULT_UNLOCKED_ACTIVITIES,
+    ...(raw.unlockedActivities ?? []),
+  ]));
   // Merge: keep saved data, fill in any missing fields from defaults
   const state: GameState = {
     ...defaults,
     ...raw,
+    unlockedActivities: mergedUnlocks,
     bots: (raw.bots ?? defaults.bots).map(b => ({
       ...defaults.bots[0],
       ...b,

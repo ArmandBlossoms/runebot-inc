@@ -8,11 +8,31 @@ export type SkillName =
 export type Skills = Record<SkillName, number>; // level 1-99
 
 export type ActivityId =
-  // Tier 1 - F2P
-  | 'wc_oaks' | 'wc_yews'
-  | 'fish_lobsters' | 'fish_sharks'
-  | 'mine_iron' | 'mine_coal'
-  | 'combat_cows' | 'combat_hill_giants'
+  // Tier 1 - F2P — Woodcutting
+  | 'wc_trees' | 'wc_oaks' | 'wc_willows' | 'wc_maples' | 'wc_yews'
+  // Tier 1 - F2P — Fishing
+  | 'fish_shrimp' | 'fish_sardines' | 'fish_anchovies' | 'fish_trout_salmon'
+  | 'fish_lobsters' | 'fish_bass' | 'fish_tuna_swordfish' | 'fish_sharks'
+  // Tier 1 - F2P — Mining
+  | 'mine_tin' | 'mine_clay' | 'mine_rune_essence' | 'mine_iron' | 'mine_silver'
+  | 'mine_coal' | 'mine_gold' | 'mine_mithril' | 'mine_adamantite' | 'mine_runite_wilderness'
+  // Tier 1 - F2P — Smithing
+  | 'smith_bronze_bars' | 'smith_iron_bars' | 'smith_steel_bars' | 'smith_gold_bars'
+  | 'smith_iron_platebodies' | 'smith_mithril_bars' | 'smith_adamant_bars'
+  // Tier 1 - F2P — Runecrafting
+  | 'rc_air_runes' | 'rc_mind_runes' | 'rc_water_runes' | 'rc_earth_runes'
+  | 'rc_fire_runes' | 'rc_body_runes'
+  // Tier 1 - F2P — Magic
+  | 'magic_low_alch' | 'magic_telegrab_wines' | 'magic_high_alch_plates'
+  // Tier 1 - F2P — Production / misc
+  | 'tan_cowhides' | 'stronghold_clearout'
+  // Tier 1 - F2P — Combat
+  | 'combat_chickens' | 'combat_giant_rats' | 'combat_men' | 'combat_monks'
+  | 'combat_goblins' | 'combat_giant_frogs' | 'combat_cows' | 'combat_imps'
+  | 'combat_minotaurs' | 'combat_dark_wizards' | 'combat_flesh_crawlers'
+  | 'combat_zombies' | 'combat_skeletons' | 'combat_giant_spiders'
+  | 'combat_hobgoblins' | 'combat_hill_giants' | 'combat_black_knights'
+  | 'combat_ankou' | 'combat_lesser_demons'
   // Tier 2 - Members
   | 'green_dragons' | 'blast_furnace' | 'nmz_afk' | 'nature_runes' | 'thieving_blackjack'
   // Tier 3 - Late game
