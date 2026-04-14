@@ -69,12 +69,14 @@ interface GameState {
 
 ## Activities
 
-| Tier | Examples | GP/hr range | Req |
-|------|---------|-------------|-----|
-| 1 (F2P) | Yew Woodcutting, Lobsters, Hill Giants | 600–11,000 | Default |
-| 2 (Members) | Green Dragons, Blast Furnace, Blackjacking | 20,000–40,000 | Unlock cost + Members |
-| 3 (Late) | Zulrah, Vorkath, Chambers of Xeric | 45,000–200,000 | Premium |
-| 4 (Raids) | Tombs of Amascut (3-bot), Theatre of Blood (5-bot) | 600k–1.2M total | Premium, team |
+| Tier | Count | Examples | GP/hr range | Req |
+|------|-------|---------|-------------|-----|
+| 1 (F2P) | **60** | Chickens, Trees, Tin, Iron Bar Smelting, Air Runes, Cowhide Tanning, Hill Giants, Wilderness Runite | 220–14,000 | Default — auto-unlocked, gated by skill reqs |
+| 2 (Members) | 5 | Green Dragons, Blast Furnace, Blackjacking | 20,000–40,000 | Unlock cost + Members |
+| 3 (Late) | 4 | Zulrah, Vorkath, Chambers of Xeric | 45,000–200,000 | Premium |
+| 4 (Raids) | 2 | Tombs of Amascut (3-bot), Theatre of Blood (5-bot) | 600k–1.2M total | Premium, team |
+
+Tier 1 is grouped in `activities.ts` by skill — Woodcutting (5), Fishing (8), Mining (10), Smithing (7), Runecrafting (6), Magic (3), Production/Misc (2), Combat (19).
 
 ## Upgrades Summary
 
@@ -115,7 +117,7 @@ Sale PP = `Math.floor(avgCombat / 2)`
 - Fonts: Press Start 2P (headings), Share Tech Mono (everything else) — loaded from Google Fonts
 - Scanline overlay at `z-index: 1000`, pointer-events: none
 
-## Current Status (as of 2026-04-12)
+## Current Status (as of 2026-04-14)
 
 - MVP is **complete and working** — verified via Playwright
 - All 4 activity tiers defined with real numbers
@@ -123,6 +125,64 @@ Sale PP = `Math.floor(avgCombat / 2)`
 - Prestige system skeleton in place (earn PP, spend on 4 upgrades)
 - Save/load + offline progress working
 - Bot account lifecycle (create → assign → collect → sell/dismiss) working
+
+## Work Log
+
+### 2026-04-14 — Phase 2a complete: Tier 2 Combat/Slayer/Bosses
+- Added 16 new Tier 2 activities: 1 combat (Moss Giants), 11 Slayer monsters (Crawling Hands → Nechryael, levels 5-80), 5 entry-level bosses (Obor, Giant Mole, Sarachnis, KBD, Barrows).
+- Tier 2 count: 5 → 21.
+- Bumped unit test invariant `TIER_2_ACTIVITIES.length >= 21`, added test asserting all Tier 2 activities have `requiresMembers: true`.
+- Verified: 17/17 vitest tests pass, `npm run build` clean.
+- Tier 2 progress: 21/~50 target. Phases 2b and 2c remaining.
+
+### 2026-04-14 — Tier 2 expansion plan (in progress)
+
+Tier 2 (Members mid-game) currently has 5 activities. Goal: bring it to ~50 by adding ~46 across three phases. Tier 2 activities all have `requiresMembers: true`, `unlockCost > 0`, and appear in the picker's locked-section (Tier 2 activities are NOT added to DEFAULT_UNLOCKED_ACTIVITIES).
+
+**Inspiration sources:** OSRS wiki Money Making Guide (Combat, Skilling, Slayer pages) — researched via WebSearch. Key references: Slayer monsters by level, beginner bosses (Mole, KBD, Sarachnis, Barrows), members fishing (monkfish/karambwan/anglerfish), members WC (teaks/mahogany/magic/redwood), Lunar magic spells, master farmer / pyramid plunder thieving, rooftop agility.
+
+**Existing Tier 2 (do not duplicate):** green_dragons, blast_furnace, nmz_afk, nature_runes, thieving_blackjack.
+
+**Phase 2a — Combat, Slayer & Bosses (16 new):**
+- combat_moss_giants (Cmb 42)
+- slayer_crawling_hands (Slayer 5)
+- slayer_banshees (Slayer 15)
+- slayer_pyrefiends (Slayer 30)
+- slayer_basilisks (Slayer 40)
+- slayer_bloodvelds (Slayer 50)
+- slayer_aberrant_spectres (Slayer 60)
+- slayer_dust_devils (Slayer 65)
+- slayer_kurasks (Slayer 70)
+- slayer_gargoyles (Slayer 75)
+- slayer_nechryael (Slayer 80)
+- boss_obor (Cmb 60+, Hill Giant boss)
+- boss_giant_mole (Cmb 60+)
+- boss_sarachnis (Cmb 70+)
+- boss_kbd (Cmb 80+, King Black Dragon)
+- boss_barrows (Cmb 70+)
+
+**Phase 2b — Members Skilling / Gathering (15 new):**
+- wc_teaks (WC 35), wc_mahogany (WC 50), wc_magic (WC 75), wc_redwood (WC 90)
+- fish_barbarian (Fish 48 — barbarian fishing), fish_monkfish (Fish 62), fish_karambwan (Fish 65), fish_anglerfish (Fish 82), fish_dark_crabs (Fish 85, Wild)
+- mine_motherlode (Mining 30, paydirt), mine_pure_essence (Mining 30), mine_blast_mine (Mining 75), mine_amethyst (Mining 92)
+- smith_cannonballs (Smithing 35, AFK), smith_blast_furnace_rune (Smithing 85)
+
+**Phase 2c — RC, Magic, Thieving, Agility, Misc (15 new):**
+- rc_law_runes (RC 54), rc_death_runes (RC 65), rc_blood_runes (RC 77), rc_zmi_altar (RC 50)
+- magic_humidify (Magic 68 Lunar), magic_plank_make (Magic 86 Lunar), magic_enchant_bolts (Magic 27+)
+- thieve_silk_stalls (Thieving 20), thieve_master_farmers (Thieving 38), thieve_ardougne_knights (Thieving 55), thieve_pyramid_plunder (Thieving 71)
+- agility_brimhaven_arena (Agility 1), agility_pyramid (Agility 30), agility_canifis_rooftop (Agility 40), agility_hallowed_sepulchre (Agility 52)
+
+**Test gates after each phase:** `npm test` (vitest), `npm run build`. Unit-test invariants get bumped (Tier 2 count) per phase. Commit and push at the end of each phase.
+
+### 2026-04-14 — Tier 1 expansion (commit eb62b48)
+- Tripled+ Tier 1 content: **8 → 60 activities** (target was 3×).
+- Inspired by OSRS wiki F2P money-making and combat-training guides.
+- New skill ladders added that didn't exist before: Smithing (7), Runecrafting (6), Magic (3), Production/Misc (2).
+- Combat ladder filled out from Atk 1 → Cmb 60 (was just cows + hill giants).
+- **Fixed latent bug:** free Tier 1 activities (`wc_yews`, `fish_sharks`, `mine_coal`, `combat_hill_giants`) were dead content — they had `unlockCost: 0` so they couldn't appear in `lockedActivities` (filter requires cost > 0) and weren't in `DEFAULT_UNLOCKED_ACTIVITIES`. Fix: every free Tier 1 activity is now in `DEFAULT_UNLOCKED_ACTIVITIES`; the picker's `meetsSkillRequirements` filter still hides ones the bot can't do.
+- **Save migration:** `migrateState` in `save.ts` now unions saved `unlockedActivities` with `DEFAULT_UNLOCKED_ACTIVITIES` so older saves auto-gain new free activities.
+- Verified with `npx svelte-check` (0 errors) and `npm run build` (✓ built in 1.49s).
 
 ## What's Not Done Yet (post-MVP)
 

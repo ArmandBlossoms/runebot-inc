@@ -73,12 +73,19 @@ describe('ACTIVITIES — data integrity', () => {
   });
 
   it('Tier 2/3/4 still exist (regression — previous tests rely on them)', () => {
-    expect(TIER_2_ACTIVITIES.length).toBeGreaterThanOrEqual(5);
+    expect(TIER_2_ACTIVITIES.length).toBeGreaterThanOrEqual(21); // phase 2a brings Tier 2 to 21
     expect(TIER_3_ACTIVITIES.length).toBeGreaterThanOrEqual(4);
     expect(TIER_4_ACTIVITIES.length).toBeGreaterThanOrEqual(2);
     // Anchor a few specific IDs the existing Playwright tests check
     expect(ACTIVITIES['nmz_afk' as ActivityId]).toBeDefined();
     expect(ACTIVITIES['green_dragons' as ActivityId]).toBeDefined();
+  });
+
+  it('all Tier 2 activities require Members', () => {
+    for (const id of TIER_2_ACTIVITIES) {
+      expect(ACTIVITIES[id].requiresMembers, id).toBe(true);
+      expect(ACTIVITIES[id].requiresPremium, id).toBe(false);
+    }
   });
 
   it('all Tier 2+ activities have unlockCost > 0 (so the locked-section UI shows them)', () => {

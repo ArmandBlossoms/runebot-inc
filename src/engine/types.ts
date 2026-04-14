@@ -33,8 +33,13 @@ export type ActivityId =
   | 'combat_zombies' | 'combat_skeletons' | 'combat_giant_spiders'
   | 'combat_hobgoblins' | 'combat_hill_giants' | 'combat_black_knights'
   | 'combat_ankou' | 'combat_lesser_demons'
-  // Tier 2 - Members
+  // Tier 2 - Members — Combat / Slayer / Bosses
   | 'green_dragons' | 'blast_furnace' | 'nmz_afk' | 'nature_runes' | 'thieving_blackjack'
+  | 'combat_moss_giants'
+  | 'slayer_crawling_hands' | 'slayer_banshees' | 'slayer_pyrefiends' | 'slayer_basilisks'
+  | 'slayer_bloodvelds' | 'slayer_aberrant_spectres' | 'slayer_dust_devils'
+  | 'slayer_kurasks' | 'slayer_gargoyles' | 'slayer_nechryael'
+  | 'boss_obor' | 'boss_giant_mole' | 'boss_sarachnis' | 'boss_kbd' | 'boss_barrows'
   // Tier 3 - Late game
   | 'zulrah' | 'vorkath' | 'high_alching' | 'chambers_of_xeric'
   // Tier 4 - Endgame raids
