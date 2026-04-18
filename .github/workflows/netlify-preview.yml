@@ -1,0 +1,45 @@
+name: Netlify Preview Deploy
+
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Deploy preview to Netlify
+        id: netlify
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          DEPLOY_URL=$(npx netlify-cli deploy \
+            --dir=dist \
+            --message="Preview: ${{ github.ref_name }} @ ${{ github.sha }}" \
+            --json | jq -r '.deploy_url')
+          echo "deploy_url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ **Netlify preview deployed:** ${{ steps.netlify.outputs.deploy_url }}`
+            })
